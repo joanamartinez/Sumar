@@ -1,0 +1,10 @@
+html{
+    text-align: center;
+}
+
+body{
+    background-color: rgb(255, 218, 205);
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
