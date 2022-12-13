@@ -1,6 +1,4 @@
 //"Realiza la suma de 2 valores introducidos y enviados mediante AJAX a un PHP que devuelve el resultado para mostrarlo."//
-//Importamos el archivo con las traducciones.
-import { elements } from './translations.js';
 
 function addEvent() {
     //Almacenamos el valor de cada input en una variable.
@@ -16,7 +14,7 @@ function addEvent() {
 
 function FetchAPI() {
     //Creamos una variable de tipo FormData para enviar los números introducidos por el usuario al archivo php a través de Fetch.
-    var data = new FormData();
+    let data = new FormData();
     data.append("firstNum", num1);
     data.append("secondNum", num2);
     
@@ -46,9 +44,9 @@ function FetchAPI() {
 
 function XMLHttpRequestAPI() {
     //Creamos una variable de tipo XMLHttpRequest.
-    var xmlhttp = new XMLHttpRequest();
+    let xmlhttp = new XMLHttpRequest();
     //Creamos una variable de tipo FormData para enviar los números al php a través de Fetch.
-    var data = new FormData();
+    let data = new FormData();
     data.append("firstNum", num1);
     data.append("secondNum", num2);
 
@@ -106,10 +104,33 @@ function JQueryAPI() {
 }
 
 function enLang() {
-    var arrLang = document.getElementsByName("esLang");
-    console.log(elements);
+    //Creamos un array con todos los tags con el name="translate".
+    let transArr = document.getElementsByName("translate");
+    //Creamos dos variables con los valores de la variable elements del archivo translations.js
+    let elementES = Object.keys(elements);
+    let elementEN = Object.values(elements);
+
+    //Sustituimos el valor de cada tag en español por el correspondiente en inglés.
+    for (let i = 0; i < elementES.length; i++) {
+        for (let j = 0; j < transArr.length; j++) {
+            console.log(transArr[j].innerHTML)
+            document.getElementsByName("translate")[j].innerHTML = elementEN[j];
+        }
+    }
 }
 
 function esLang() {
-    
+    //Creamos un array con todos los tags con el name="translate".
+    let transArr = document.getElementsByName("translate");
+    //Creamos dos variables con los valores de la variable elements del archivo translations.js
+    let elementES = Object.keys(elements);
+    let elementEN = Object.values(elements);
+
+    //Sustituimos el valor de cada tag en inglés por el correspondiente en español.
+    for (let i = 0; i < elementEN.length; i++) {
+        for (let j = 0; j < transArr.length; j++) {
+            console.log(transArr[j].innerHTML)
+            document.getElementsByName("translate")[j].innerHTML = elementES[j];
+        }
+    }
 }

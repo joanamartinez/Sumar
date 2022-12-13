@@ -12,22 +12,22 @@
     <script src="functions.js"></script>
     <script src="translations.js"></script>
 
-    <title name="esLang">Suma de valores</title>
+    <title name="translate">Suma de valores</title>
 </head>
 <body>
-    <h1 name="esLang">Introduce dos valores a sumar: </h1>
-    <input type="number" name="num1" id="num1">
-    <input type="number" name="num2" id="num2">
-    <input type="button" value="Suma" onclick="addEvent()">
-
-    <div id="resultDiv">
-        
-    </div>
-
     <div id="lang">
-        <a href="#" onclick="enLang()">EN</a><br>
+        <a href="#" onclick="enLang()">EN</a>
         <a href="#" onclick="esLang()">ES</a>
     </div>
-
+    <div class="container">
+        <div class="content">
+            <h1 name="translate">Introduce dos valores a sumar: </h1>
+            <input type="number" name="num1" id="num1">
+            <input type="number" name="num2" id="num2">
+            <button name="translate" onclick="addEvent()">Suma</button>
+            <!--<input type="button" value="Suma" onclick="addEvent()">-->
+            <div id="resultDiv"></div>
+        </div>
+    </div>
 </body>
 </html>
