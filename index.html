@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importamos el archivo CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Importamos AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Importamos los archivos JavaScript -->
     <script src="functions.js"></script>
-    <title>Suma de valores</title>
+    <script src="translations.js"></script>
+
+    <title name="esLang">Suma de valores</title>
 </head>
 <body>
-    <h1>Introduce dos valores a sumar: </h1>
+    <h1 name="esLang">Introduce dos valores a sumar: </h1>
     <input type="number" name="num1" id="num1">
     <input type="number" name="num2" id="num2">
-    <input type="button" value="Suma" onclick="AddEvent()">
-    <div id="results"></div>
+    <input type="button" value="Suma" onclick="addEvent()">
+
+    <div id="resultDiv">
+        
+    </div>
+
+    <div id="lang">
+        <a href="#" onclick="enLang()">EN</a><br>
+        <a href="#" onclick="esLang()">ES</a>
+    </div>
+
 </body>
 </html>
