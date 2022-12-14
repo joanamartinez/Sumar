@@ -20,16 +20,23 @@ function FetchAPI() {
     
     /* 
      * Hacemos la request al archivo de php con Fetch. 
-     * Utilizamos el método POST porque queremos crear una nueva suma. 
+     * Utilizamos el método POST para crear una nueva suma. 
      * Como body de la request le pasamos la variable creada anteriormente con FormData (los 2 números a sumar).
-     * Pasamos la respuesta a json y añadimos el resultado de la request al resultH3.
+     * Si la respuesta es exitosa, la pasamos a json y añadimos el resultado de la request al resultH3.
      * En caso que la request sea errónea (falla la función add() del php), se lo haremos saber al usuario.
      */
     fetch("php/index.php",{
         method: "POST",
         body: data
     })
-    .then((response) => response.json())
+    .then((response) => {
+        console.log(response.ok);
+        if (!response.ok) {
+            throw new Error("Promise rejected")
+        } else {
+            return response.json(); 
+        }
+    })
     .then((result) => {
         resultH3.className = "";
         resultH3.className = "correct";

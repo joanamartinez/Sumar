@@ -15,12 +15,12 @@
     {
         //En caso que el valor de los inputs sea incorrecto, devolveremos el código de respuesta a la petición 403 (invalid format). 
         http_response_code(403);
+    } else {
+        /*
+         * En caso que los datos introducidos por el usuario sean correctos, 
+         * ejecutaremos la función add() con los dos números como parámetros.
+         */
+        add($firstNum, $secondNum);
     }
-
-    /*
-     * En caso de que los datos introducidos por el usuario sean correctos, 
-     * ejecutaremos la función add() con los dos números como parámetros.
-     */
-    add($firstNum, $secondNum);
 
 ?>
