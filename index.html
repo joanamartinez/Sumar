@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html id="htmlLang" lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Importamos el archivo CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- Importamos AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Importamos los archivos JavaScript -->
-    <script src="functions.js"></script>
-    <script src="translations.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/translations.js"></script>
 
     <title name="translate">Suma de valores</title>
 </head>
 <body>
+    <div class="bgImg"></div>
     <div id="lang">
-        <a href="#" onclick="enLang()">EN</a>
+        <a href="#" onclick="enLang()">EN</a><br>
         <a href="#" onclick="esLang()">ES</a>
     </div>
     <div class="container">
@@ -24,9 +25,12 @@
             <h1 name="translate">Introduce dos valores a sumar: </h1>
             <input type="number" name="num1" id="num1">
             <input type="number" name="num2" id="num2">
-            <button name="translate" onclick="addEvent()">Suma</button>
+            <button class="button" role="button" name="translate" onclick="addEvent()">Suma</button>
             <!--<input type="button" value="Suma" onclick="addEvent()">-->
-            <div id="resultDiv"></div>
+            <div>
+                <h3 name="translate">Resultado: </h3>
+                <h3 id="resultH3" name="translate"></h3>
+            </div>
         </div>
     </div>
 </body>

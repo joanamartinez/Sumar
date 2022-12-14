@@ -11,12 +11,10 @@
     }
     
     //Con un if, comprobaremos que lo introducido en los inputs sea realmente un número y que no estén vacíos.
-    if( !is_numeric($firstNum) && !is_numeric($secondNum) 
-    ||  is_numeric($firstNum) && !is_numeric($secondNum) 
-    || !is_numeric($firstNum) && is_numeric($secondNum) ) 
+    if( !is_numeric($firstNum) || !is_numeric($secondNum) ) 
     {
-        //En caso que el valor de los inputs sea incorrecto, devolveremos el código de respuesta a la petición 404. 
-        http_response_code(404);
+        //En caso que el valor de los inputs sea incorrecto, devolveremos el código de respuesta a la petición 403 (invalid format). 
+        http_response_code(403);
     }
 
     /*

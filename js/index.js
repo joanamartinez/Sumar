@@ -5,7 +5,7 @@ function addEvent() {
     num1 = document.getElementById("num1").value;
     num2 = document.getElementById("num2").value;
     //Almacemnos en una variable el <div> donde queremos mostrar el resultado de la suma.
-    resultDiv = document.getElementById("resultDiv");
+    resultH3 = document.getElementById("resultH3");
     
     FetchAPI();
     //XMLHttpRequestAPI();
@@ -22,23 +22,23 @@ function FetchAPI() {
      * Hacemos la request al archivo de php con Fetch. 
      * Utilizamos el método POST porque queremos crear una nueva suma. 
      * Como body de la request le pasamos la variable creada anteriormente con FormData (los 2 números a sumar).
-     * Pasamos la respuesta a json y añadimos el resultado de la request al resultDiv.
-     * En caso que la request sea errónea, se lo haremos saber al usuario.
+     * Pasamos la respuesta a json y añadimos el resultado de la request al resultH3.
+     * En caso que la request sea errónea (falla la función add() del php), se lo haremos saber al usuario.
      */
-    fetch("functions.php",{
+    fetch("php/index.php",{
         method: "POST",
         body: data
     })
     .then((response) => response.json())
     .then((result) => {
-        resultDiv.className = "";
-        resultDiv.className = "correct";
-        return resultDiv.innerHTML = result;
+        resultH3.className = "";
+        resultH3.className = "correct";
+        return resultH3.innerHTML = result;
     })
     .catch(() => {
-        resultDiv.className = "";
-        resultDiv.className = "error";
-        resultDiv.innerHTML = "Incorrect input!";
+        resultH3.className = "";
+        resultH3.className = "error";
+        resultH3.innerHTML = "Input incorrecto!";
     });
 }
 
@@ -51,7 +51,7 @@ function XMLHttpRequestAPI() {
     data.append("secondNum", num2);
 
     /* 
-     * En cuanto el estado de la request pase a completada, añadiremos al resultDiv el resultado de la suma.
+     * En cuanto el estado de la request pase a completada, añadiremos al resultH3 el resultado de la suma.
      * En caso que la request resulte errónea, se lo haremos saber al usuario.
      * Hacemos la request al archivo de php con XMLHttpRequest. 
      * Utilizamos el método POST porque queremos crear una nueva suma. 
@@ -60,45 +60,45 @@ function XMLHttpRequestAPI() {
     xmlhttp.onreadystatechange = function() {
 
         if (this.readyState == 4 && this.status == 200) {
-            resultDiv.className = "";
-            resultDiv.className = "correct";
-            resultDiv.innerHTML = this.response;
+            resultH3.className = "";
+            resultH3.className = "correct";
+            resultH3.innerHTML = this.response;
 
-        } else if(this.status == 404){
-            resultDiv.className = "";
-            resultDiv.className = "error";
-            resultDiv.innerHTML = "Incorrect input!";
+        } else if(this.status == 403){
+            resultH3.className = "";
+            resultH3.className = "error";
+            resultH3.innerHTML = "Incorrect input!";
         }
 
     };
-    xmlhttp.open("POST", "functions.php");
+    xmlhttp.open("POST", "php/index.php");
     xmlhttp.send(data);
 }
 
 function JQueryAPI() {
     /* 
      * Utilizamos el método ajax() de JQuery para realizar el request.
-     * Hacemos la petición con POST y apuntamos al archivo "functions.php" para que realice la suma.
+     * Hacemos la petición con POST y apuntamos al archivo "index.php" para que realice la suma.
      * Como datos de la request le pasamos una variable tipo json (data) con los 2 números a sumar.
-     * Si la rquest es correcta, añadiremos el resultado de al resultDiv.
+     * Si la rquest es correcta, añadiremos el resultado de al resultH3.
      * En caso que no lo sea, se lo haremos saber al usuario.
      */
     $.ajax({
         type:"POST",
-        url: "functions.php",
+        url: "php/index.php",
         data: {
             "firstNum": num1,
             "secondNum": num2
         },
         success: (response) => {
-            resultDiv.className = "";
-            resultDiv.className = "correct";
-            resultDiv.innerHTML = response;
+            resultH3.className = "";
+            resultH3.className = "correct";
+            resultH3.innerHTML = response;
         },
         error: () => {
-            resultDiv.className = "";
-            resultDiv.className = "error";
-            resultDiv.innerHTML = "Incorrect input!";
+            resultH3.className = "";
+            resultH3.className = "error";
+            resultH3.innerHTML = "Incorrect input!";
         }
     });
 }
@@ -106,31 +106,35 @@ function JQueryAPI() {
 function enLang() {
     //Creamos un array con todos los tags con el name="translate".
     let transArr = document.getElementsByName("translate");
-    //Creamos dos variables con los valores de la variable elements del archivo translations.js
-    let elementES = Object.keys(elements);
+    //Creamos la variable con los valores de la variable "elements" del archivo translations.js
     let elementEN = Object.values(elements);
 
     //Sustituimos el valor de cada tag en español por el correspondiente en inglés.
-    for (let i = 0; i < elementES.length; i++) {
-        for (let j = 0; j < transArr.length; j++) {
-            console.log(transArr[j].innerHTML)
+    //Comprobamos también que no sustituimos el resultado como tal.
+    for (let j = 0; j < transArr.length; j++) {
+        if (isNaN(transArr[j].innerHTML)) {
             document.getElementsByName("translate")[j].innerHTML = elementEN[j];
         }
     }
+    //Cambiamos el atributo del idioma del html.
+    let htmlLang = document.getElementById("htmlLang");
+    htmlLang.setAttribute("lang", "en");
 }
 
 function esLang() {
     //Creamos un array con todos los tags con el name="translate".
     let transArr = document.getElementsByName("translate");
-    //Creamos dos variables con los valores de la variable elements del archivo translations.js
+    //Creamos la variables con los keys de la variable "elements" del archivo translations.js
     let elementES = Object.keys(elements);
-    let elementEN = Object.values(elements);
 
     //Sustituimos el valor de cada tag en inglés por el correspondiente en español.
-    for (let i = 0; i < elementEN.length; i++) {
-        for (let j = 0; j < transArr.length; j++) {
-            console.log(transArr[j].innerHTML)
+    //Comprobamos también que no sustituimos el resultado como tal.
+    for (let j = 0; j < transArr.length; j++) {
+        if (isNaN(transArr[j].innerHTML)) {
             document.getElementsByName("translate")[j].innerHTML = elementES[j];
         }
     }
+    //Cambiamos el atributo del idioma del html.
+    let htmlLang = document.getElementById("htmlLang");
+    htmlLang.setAttribute("lang", "es");
 }
